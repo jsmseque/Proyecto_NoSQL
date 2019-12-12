@@ -28,7 +28,10 @@ namespace Proyecto_NoSQL.Controllers
         // GET: Cliente/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var laConexion = new Clientes();
+            Cliente cliente = laConexion.FindClienteDocument("proyectoDb", "clientes_bson", id);
+          
+            return View(cliente);
         }
 
         // GET: Cliente/Create

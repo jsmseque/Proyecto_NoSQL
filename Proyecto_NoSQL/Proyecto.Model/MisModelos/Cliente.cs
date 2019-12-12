@@ -60,10 +60,8 @@ namespace Proyecto.Model.MisModelos
 
     public class Telefono
     {
-        public Telefono(string tipo, string numero)
+        public Telefono()
         {
-            Tipo = tipo;
-            Numero = numero;
         }
 
         public string Tipo { get; set; }
@@ -72,12 +70,8 @@ namespace Proyecto.Model.MisModelos
 
     public class Direccion
     {
-        public Direccion(string pais, string provincia, string canton, string distrito)
+        public Direccion()
         {
-            Pais = pais;
-            Provincia = provincia;
-            Canton = canton;
-            Distrito = distrito;
         }
 
         public string Pais { get; set; }

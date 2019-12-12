@@ -32,6 +32,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
+            <th>
+                Dirección
+            </th>
             <th></th>
         </tr>
     
@@ -52,6 +55,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direccion.Provincia)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Cedula }) |
