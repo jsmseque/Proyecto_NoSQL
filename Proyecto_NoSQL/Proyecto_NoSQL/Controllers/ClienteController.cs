@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MongoDB.Bson;
 using Proyecto.Logic.Conexion;
 using Proyecto.Model.MisModelos;
 
@@ -15,8 +16,13 @@ namespace Proyecto_NoSQL.Controllers
         {
             ///Cliente clientes;
             ///
-           
-            return View(new List<Cliente>());
+
+            var laConexion = new Clientes();
+            List<Cliente> clientes = new List<Cliente>();
+            clientes = laConexion.FindClientesAsDocuments("proyectoDb", "clientes_bson");
+
+
+            return View(clientes);
         }
 
         // GET: Cliente/Details/5
@@ -39,9 +45,11 @@ namespace Proyecto_NoSQL.Controllers
             {
                 try
                 {
-                   new  BdMongo().CreateDatabase("localhost", "proyectoDb", "clientes_bson");
-                   // var laInsercion = new InsertarCliente();
 
+                    BsonDocument[] clienteNuevo = new BsonDocument[] { cliente.ToBsonDocument() };
+
+                    var laConexion = new Clientes();
+                    laConexion.Insert<BsonDocument>(clienteNuevo, "proyectoDb", "clientes_bson");
 
                     return RedirectToAction("Index");
                 }
@@ -51,22 +59,25 @@ namespace Proyecto_NoSQL.Controllers
                 }
             }
             else { return View(); }
-            
+
         }
 
         // GET: Cliente/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var laConexion = new Clientes();
+            Cliente cliente = laConexion.FindClienteDocument("proyectoDb", "clientes_bson", id);
+            return View(cliente);
         }
 
         // POST: Cliente/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Cliente cliente)
         {
             try
             {
-                // TODO: Add update logic here
+                var laConexion = new Clientes();
+                laConexion.UpdateClientes("proyectoDb", "clientes_bson", id,cliente);
 
                 return RedirectToAction("Index");
             }
@@ -77,18 +88,24 @@ namespace Proyecto_NoSQL.Controllers
         }
 
         // GET: Cliente/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
-            return View();
+            var laConexion = new Clientes();
+            Cliente cliente = laConexion.FindClienteDocument("proyectoDb", "clientes_bson", id);
+                
+            return View(cliente);
         }
 
         // POST: Cliente/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id,Cliente cliente)
         {
             try
             {
-                // TODO: Add delete logic here
+                
+                var laConexion = new Clientes();
+                laConexion.DeleteClientesDocument("proyectoDb", "clientes_bson",id);
 
                 return RedirectToAction("Index");
             }

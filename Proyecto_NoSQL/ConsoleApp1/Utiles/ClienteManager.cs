@@ -9,6 +9,7 @@ namespace ConsoleApp1.Utiles
 {
     public class ClienteManager
     {
+
         public BsonDocument[] GetBsonClientes()
         {
             BsonDocument clienteUno = new BsonDocument()
@@ -28,7 +29,8 @@ namespace ConsoleApp1.Utiles
                     new BsonDocument("provincia", "San José"),
                     new BsonDocument("canton", "Mora"),
                     new BsonDocument("distrito", "Tabarcia")
-                } } };
+                } }
+};
 
 
             BsonDocument clienteDos = new BsonDocument()

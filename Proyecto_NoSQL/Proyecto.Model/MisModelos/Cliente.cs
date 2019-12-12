@@ -14,20 +14,24 @@ namespace Proyecto.Model.MisModelos
     //[BsonIgnoreExtraElements]
    public class Cliente
     {
-        public Cliente(string clienteId, int cedula, string nombre, string primerApellido, string segundoApellido, Telefono[] telefonos, string email, Direccion direccion)
+        public Cliente()
         {
-            ClienteId = clienteId;
-            Cedula = cedula;
-            Nombre = nombre;
-            PrimerApellido = primerApellido;
-            SegundoApellido = segundoApellido;
-            Telefonos = telefonos;
-            Email = email;
-            Direccion = direccion;
         }
 
-        [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
-        public string ClienteId { get; set; }
+        /* public Cliente(string clienteId, int cedula, string nombre, string primerApellido, string segundoApellido, Telefono[] telefonos, string email, Direccion direccion)
+         {
+             ClienteId = clienteId;
+             Cedula = cedula;
+             Nombre = nombre;
+             PrimerApellido = primerApellido;
+             SegundoApellido = segundoApellido;
+             Telefonos = telefonos;
+             Email = email;
+             Direccion = direccion;
+         }*/
+
+        [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]     
+        public ObjectId ClienteId { get; set; }
 
         [BsonElement("cedula")]
         public int Cedula { get; set; }

@@ -52,15 +52,22 @@ namespace Proyecto.Logic.Conexion
         {
             MongoClient client = GetMongoClient(hostName);
             IMongoDatabase database = client.GetDatabase(dbName);
+           
             return database;
         }
 
         public IMongoDatabase CreateDatabase(string hostName, string databaseName, string collectionName)
         {
-            
             var database = GetDatabaseReference(hostName, databaseName);
+
+            try { 
+            
             database.CreateCollection(collectionName);
             return database;
+            }
+            catch (Exception) {
+                return database;
+            }
         }
 
 

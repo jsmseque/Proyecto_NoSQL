@@ -1,4 +1,8 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
+using Proyecto.Model.MisModelos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,49 +17,92 @@ namespace Proyecto.Logic.Conexion
             var laConexion = new BdMongo();
             var db = laConexion.GetDatabaseReference("localhost", dbName);
             var clientesCollection = db.GetCollection<T>(tableName);
+
             await clientesCollection.InsertManyAsync(clientes);
+            
         }
+       
 
-
-        public async static void FindClientesAsDocuments(string dbName, string collName)
+        
+        public  List<Cliente> FindClientesAsDocuments(string dbName, string collName)
         {
-            var db = DatabaseHelper.GetDatabaseReference("localhost", dbName);
+            var laConexion = new BdMongo();
+            var db = laConexion.GetDatabaseReference("localhost", dbName);
             var collection = db.GetCollection<BsonDocument>(collName);
+        
+            List<Cliente> clientes = new List<Cliente>();
             var filter = new BsonDocument();
-            int count = 0;
-            using (var cursor = await collection.FindAsync<BsonDocument>(filter))
+           
+            using (var cursor =  collection.FindSync<BsonDocument>(filter))
             {
-                while (await cursor.MoveNextAsync())
+                while ( cursor.MoveNext())
                 {
                     var batch = cursor.Current;
                     foreach (var document in batch)
                     {
-                        var clienteName = document.GetElement("name").Value.ToString(
-                        );
-                        Console.WriteLine("Clientes Name: {0}", clienteName);
-                        count++;
+                        var myObj = BsonSerializer.Deserialize<Cliente>(document);
+                        clientes.Add(myObj);                      
                     }
                 }
             }
+            return clientes;
         }
 
-        public static void UpdateClientes(string dbName, string collName)
+        
+        public void UpdateClientes(string dbName, string collName,int id,Cliente cliente)
         {
-            var db = DatabaseHelper.GetDatabaseReference("localhost", dbName);
-            var collection = db.GetCollection<Clientes>(collName);
-            var builder = Builders<Clientes>.Filter;
-            var filter = builder.Eq("name", "Nombre");
-            var update = Builders<Clientes>.Update
-             .Set("name", "new name")
-             .Set(d => d.Year, 1900);
-            UpdateResult result = collection.UpdateOne(filter, update);
-            Console.WriteLine(result.ToBsonDocument());
+            var laConexion = new BdMongo();
+            var db = laConexion.GetDatabaseReference("localhost", dbName);
+            var collection = db.GetCollection<Cliente>(collName);
+          
+            var expresssionFilter = Builders<Cliente>.Filter.Eq(x => x.Cedula, id);
+
+             collection.ReplaceOne(m => m.Cedula == id, cliente);
+
         }
 
-        var collection = db.GetCollection<Clientes>(collName);
-        DeleteResult result = await collection.DeleteOneAsync(m => m.Name == "The Seven Samurai");
+    
 
 
+        public  void DeleteClientesDocument(string dbName, string collName,int id)
+        {
+         
+            var laConexion = new BdMongo();
+            var db = laConexion.GetDatabaseReference("localhost", dbName);
+            var collection = db.GetCollection<Cliente>(collName);
 
-}
+          
+            DeleteResult result = collection.DeleteOne(m => m.Cedula== id );
+
+            
+        }
+
+
+        public Cliente FindClienteDocument(string dbName, string collName, int id)
+        {
+
+            var laConexion = new BdMongo();
+            var db = laConexion.GetDatabaseReference("localhost", dbName);
+            var collection = db.GetCollection<Cliente>(collName);          
+           var expresssionFilter = Builders<Cliente>.Filter.Eq(x => x.Cedula,id );
+
+            Cliente cliente = new Cliente();
+            using (var cursor = collection.FindSync<BsonDocument>(expresssionFilter))
+            {
+                while (cursor.MoveNext())
+                {
+                    var batch = cursor.Current;
+                    foreach (var document in batch)
+                    {
+                        var myObj = BsonSerializer.Deserialize<Cliente>(document);
+                        cliente = myObj;
+                    }
+                }
+            }
+
+            return cliente;
+
+        }
+
+    }
 }
