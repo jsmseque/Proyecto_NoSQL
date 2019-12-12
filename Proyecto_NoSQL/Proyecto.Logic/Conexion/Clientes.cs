@@ -28,11 +28,11 @@ namespace Proyecto.Logic.Conexion
         {
             var laConexion = new BdMongo();
             var db = laConexion.GetDatabaseReference("localhost", dbName);
-            var collection = db.GetCollection<BsonDocument>(collName);
+           
         
             List<Cliente> clientes = new List<Cliente>();
             var filter = new BsonDocument();
-           
+            var collection = db.GetCollection<Cliente>(collName);
             using (var cursor =  collection.FindSync<BsonDocument>(filter))
             {
                 while ( cursor.MoveNext())
@@ -53,15 +53,25 @@ namespace Proyecto.Logic.Conexion
         {
             var laConexion = new BdMongo();
             var db = laConexion.GetDatabaseReference("localhost", dbName);
-            var collection = db.GetCollection<Cliente>(collName);
-          
-            var expresssionFilter = Builders<Cliente>.Filter.Eq(x => x.Cedula, id);
+            // var collection = db.GetCollection<Cliente>(collName);
+            //var collection = db.GetCollection<BsonDocument>(collName);
 
-             collection.ReplaceOne(m => m.Cedula == id, cliente);
+            var expresssionFilter = Builders<Cliente>.Filter.Eq(x => x.Cedula, id);
+            var collection = db.GetCollection<Cliente>(collName);
+            var builder = Builders<Cliente>.Filter;
+            var filter = builder.Eq("cedula", id);
+            var findclientes =  collection.Find(filter);
+            var elCliente = findclientes.FirstOrDefault();
+            var idAnterior = elCliente.ClienteId;
+            cliente.ClienteId=idAnterior;
+
+
+            collection.ReplaceOne(filter, cliente);
+          
 
         }
 
-    
+
 
 
         public  void DeleteClientesDocument(string dbName, string collName,int id)
