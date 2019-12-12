@@ -9,25 +9,27 @@ namespace Proyecto.Model.MisModelos
 {
     public class Cobro
     {
-        [Display(Name = "Número de factura")]
-        public string factura;
-        [Display(Name = "Cédula")]
-        public int cedula;
-        [Display(Name = "Descripción")]
-        public string descripcion;
-        [Display(Name = "Medio de pago")]
-        public string medioPago;
-        [Display(Name = "Costo")]
-        public double valor;
-        [Display(Name = "IVA")]
-        public double iva;
-        [Display(Name = "Monto pagado")]
-        public double montoCancelado;
-        [Display(Name = "Cámbio")]
-        public double cambio;
-
         public Cobro()
         {
         }
-    }
+
+        [Display(Name = "Número de factura")]
+        public int factura { get; set; }
+        [Display(Name = "Cédula")]
+        public int cedula { get; set; }
+        [Display(Name = "Descripción")]
+        public string descripcion { get; set; }
+        [Display(Name = "Medio de pago")]
+        public string medioPago { get; set; }
+        [Display(Name = "Costo")]
+        public double valor { get; set; }
+        [Display(Name = "IVA(%)")]
+        public double iva { get; set; }
+        [Display(Name = "Monto pagado")]
+        public double montoCancelado { get; set; }
+        [Display(Name = "Cámbio")]
+        public double cambio{ get; set; }
+
+
+}
 }

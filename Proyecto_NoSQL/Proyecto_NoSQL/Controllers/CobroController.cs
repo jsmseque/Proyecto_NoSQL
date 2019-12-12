@@ -19,7 +19,6 @@ namespace Proyecto_NoSQL.Controllers
             return View();
         }
         [HttpPost]
-
         public ActionResult Index(Cobro factura)
         {
             try
@@ -31,8 +30,20 @@ namespace Proyecto_NoSQL.Controllers
 
                 if (cliente != null)
                 {
-
-                   CorreoElectronico.EnviarEmail(cliente.Nombre + " " + cliente.PrimerApellido + " " + cliente.SegundoApellido, cliente.Email,"Información de factura");
+                    double impuestos = (factura.iva / 100) * factura.valor;
+                    double total = factura.valor + impuestos;
+                    double cambio =  factura.montoCancelado- total ;
+                    CorreoElectronico.EnviarEmail(cliente.Nombre + " " + cliente.PrimerApellido + " " + cliente.SegundoApellido, cliente.Email,
+                        "Información de factura:\n" +
+                        "Cédula:" + cliente.Cedula + "\n" +
+                        "Descripción: " + factura.descripcion + "\n" +
+                        "Costo del sercio= " + factura.valor + "\n" +
+                       "IVA(" + factura.iva + ") = " + impuestos + "\n" +
+                       "Total= " +  total + "\n" +
+                       "Método de Pago: " + factura.medioPago + "\n" +
+                       "Monto Cancelado= " + factura.montoCancelado + "\n" +
+                       "Cambio= " + cambio
+                       );
          
 
                    // ViewBag.mensaje = "Nueva factura";

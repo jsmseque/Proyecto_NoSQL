@@ -12,8 +12,8 @@ namespace Proyecto.Logic.Utilitarias
     {
         public static bool EnviarEmail(string nombreUsuario, string correoDestinatario, string Mensaje)
         {
-            string correoAdm = "NoSQLPROYECTO2019@gmail.com";
-            string claveAdm = "johan999999999";
+            string correoAdm = "nosqlproyecto2019@gmail.com";
+            string claveAdm = "jsmseque999999999";
             string asunto = "Información pago";
             string body = "Saludos " + nombreUsuario + ".\n" + Mensaje + " ";
 
