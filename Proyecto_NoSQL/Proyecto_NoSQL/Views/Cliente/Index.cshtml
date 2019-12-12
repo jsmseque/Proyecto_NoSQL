@@ -33,38 +33,67 @@
                 @Html.DisplayNameFor(model => model.SegundoApellido)
             </th>
             <th>
+                Tipo télefono
+            </th>
+            <th>
+               Número teléfono
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                Dirección
             </th>
             <th></th>
         </tr>
+    
+    @foreach (var item in Model)
+    {
+        <tr>
 
-        @foreach (var item in Model)
-        {
-            <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cedula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrimerApellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SegundoApellido)
+            </td>
+            <td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cedula)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PrimerApellido)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SegundoApellido)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Cedula }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Cedula }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Cedula })
-                </td>
-            </tr>
-        }
+                @{
+                    String tipoTelef = "-";
+                    String numero = "-";
+                    if (item.Telefonos != null)
+                    {
+                        tipoTelef = item.Telefonos.First().Tipo.ToString();
+                        numero = item.Telefonos.First().Numero.ToString();
+                    }
+                }
 
+                @tipoTelef
+            </td>
+            <td>
+               @numero
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direccion.Provincia)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Cedula }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Cedula }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Cedula })
+            </td>
+        </tr>
+    }
+    
     </table>
 </body>
 </html>

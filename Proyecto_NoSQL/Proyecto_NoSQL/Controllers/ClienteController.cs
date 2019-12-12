@@ -28,7 +28,10 @@ namespace Proyecto_NoSQL.Controllers
         // GET: Cliente/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var laConexion = new Clientes();
+            Cliente cliente = laConexion.FindClienteDocument("proyectoDb", "clientes_bson", id);
+          
+            return View(cliente);
         }
 
         // GET: Cliente/Create
@@ -39,14 +42,28 @@ namespace Proyecto_NoSQL.Controllers
 
         // POST: Cliente/Create
         [HttpPost]
-        public ActionResult Create(Cliente cliente)
+        public ActionResult Create(Cliente cliente,string tipoTef,string numeroTef)
         {
             if (cliente != null)
             {
                 try
                 {
+                    List<Telefono> nuevosTelef = new List<Telefono>();
+                    Telefono[] telefonoExistentes = cliente.Telefonos;
+                    if (telefonoExistentes!=null)
+                    {
+                        List<Telefono> telefonoExistentesList = telefonoExistentes.ToList();
+                        nuevosTelef = telefonoExistentesList;
+                        nuevosTelef.Add(new Telefono(tipoTef, numeroTef));
+                    }
+                    else
+                    {
+                        nuevosTelef.Add(new Telefono(tipoTef, numeroTef));
+                    }
 
-                    BsonDocument[] clienteNuevo = new BsonDocument[] { cliente.ToBsonDocument() };
+                    cliente.Telefonos= nuevosTelef.ToArray();
+
+                     BsonDocument[] clienteNuevo = new BsonDocument[] { cliente.ToBsonDocument() };
 
                     var laConexion = new Clientes();
                     laConexion.Insert<BsonDocument>(clienteNuevo, "proyectoDb", "clientes_bson");
@@ -67,15 +84,32 @@ namespace Proyecto_NoSQL.Controllers
         {
             var laConexion = new Clientes();
             Cliente cliente = laConexion.FindClienteDocument("proyectoDb", "clientes_bson", id);
+            TempData["telefonos"]=cliente.Telefonos;
             return View(cliente);
         }
 
         // POST: Cliente/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Cliente cliente)
+        public ActionResult Edit(int id, Cliente cliente, string tipoTef, string numeroTef)
         {
             try
             {
+                
+                List<Telefono> nuevosTelef = new List<Telefono>();
+                Telefono[] telefonoExistentes = (Telefono[])TempData["telefonos"];
+                if (telefonoExistentes != null)
+                {
+                    List<Telefono> telefonoExistentesList = telefonoExistentes.ToList();
+                    nuevosTelef = telefonoExistentesList;
+                    nuevosTelef.Add(new Telefono(tipoTef, numeroTef));
+                }
+                else
+                {
+                    nuevosTelef.Add(new Telefono(tipoTef, numeroTef));
+                }
+
+                cliente.Telefonos = nuevosTelef.ToArray();
+
                 var laConexion = new Clientes();
                 laConexion.UpdateClientes("proyectoDb", "clientes_bson", id,cliente);
 

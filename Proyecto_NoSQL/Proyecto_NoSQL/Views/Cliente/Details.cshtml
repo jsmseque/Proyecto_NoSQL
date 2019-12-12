@@ -1,25 +1,24 @@
 ﻿@model Proyecto.Model.MisModelos.Cliente
 
 @{
-    ViewBag.Title = "Eliminar Cliente";
+    Layout = null;
 }
-<h2>@ViewBag.Title</h2>
-<h3>@ViewBag.Message</h3>
-
 
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
+    <title>Details</title>
 </head>
+
 <body>
-    <h3>Esta seguro de eliminar este Cliente?</h3>
     <div>
+        <h4>Cliente</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
+
                 @Html.DisplayNameFor(model => model.Cedula)
             </dt>
 
@@ -51,6 +50,27 @@
                 @Html.DisplayFor(model => model.SegundoApellido)
             </dd>
 
+            @foreach (var telefono in Model.Telefonos)
+            {
+                <dt>
+                    Tipo número de teléfono
+                </dt>
+
+                <dd>
+                    @telefono.Tipo
+                </dd>
+                <dt>
+                    Número 
+                </dt>
+
+                <dd>
+                    @telefono.Numero
+                </dd>
+
+            }
+
+
+
             <dt>
                 @Html.DisplayNameFor(model => model.Email)
             </dt>
@@ -58,6 +78,7 @@
             <dd>
                 @Html.DisplayFor(model => model.Email)
             </dd>
+
             <dt>
                 @Html.DisplayNameFor(model => model.Direccion.Pais)
             </dt>
@@ -88,16 +109,11 @@
             </dd>
 
         </dl>
-
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Index")
-            </div>
-        }
     </div>
+    <p>
+
+        @Html.ActionLink("Edit", "Edit",new { id=Model.Cedula } ) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </body>
 </html>
