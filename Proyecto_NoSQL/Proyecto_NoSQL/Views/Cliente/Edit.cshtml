@@ -1,8 +1,12 @@
 ﻿@model Proyecto.Model.MisModelos.Cliente
 
-@{
-    Layout = null;
-}
+
+    @{
+        ViewBag.Title = "Editar Cliente";
+    }
+    <h2>@ViewBag.Title</h2>
+    <h3>@ViewBag.Message</h3>
+
 
 <!DOCTYPE html>
 
@@ -14,8 +18,8 @@
 <body>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
-    
-    
+
+
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -106,7 +110,7 @@
         </div>
     </div>
     }
-    
+
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
