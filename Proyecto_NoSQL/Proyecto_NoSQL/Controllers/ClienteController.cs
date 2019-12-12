@@ -39,8 +39,8 @@ namespace Proyecto_NoSQL.Controllers
             {
                 try
                 {
-                    BdMongo.CreateDatabase("localhost", "proyectoDb", "clientes_bson");
-                    var laInsercion = new InsertarCliente();
+                   new  BdMongo().CreateDatabase("localhost", "proyectoDb", "clientes_bson");
+                   // var laInsercion = new InsertarCliente();
 
 
                     return RedirectToAction("Index");

@@ -57,6 +57,7 @@ namespace Proyecto.Logic.Conexion
 
         public IMongoDatabase CreateDatabase(string hostName, string databaseName, string collectionName)
         {
+            
             var database = GetDatabaseReference(hostName, databaseName);
             database.CreateCollection(collectionName);
             return database;
