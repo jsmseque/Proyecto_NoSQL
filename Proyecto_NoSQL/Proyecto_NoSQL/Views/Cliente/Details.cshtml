@@ -50,6 +50,27 @@
                 @Html.DisplayFor(model => model.SegundoApellido)
             </dd>
 
+            @foreach (var telefono in Model.Telefonos)
+            {
+                <dt>
+                    Tipo número de teléfono
+                </dt>
+
+                <dd>
+                    @telefono.Tipo
+                </dd>
+                <dt>
+                    Número 
+                </dt>
+
+                <dd>
+                    @telefono.Numero
+                </dd>
+
+            }
+
+
+
             <dt>
                 @Html.DisplayNameFor(model => model.Email)
             </dt>
