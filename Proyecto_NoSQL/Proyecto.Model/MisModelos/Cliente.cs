@@ -14,6 +14,18 @@ namespace Proyecto.Model.MisModelos
     //[BsonIgnoreExtraElements]
    public class Cliente
     {
+        public Cliente(string clienteId, int cedula, string nombre, string primerApellido, string segundoApellido, Telefono[] telefonos, string email, Direccion direccion)
+        {
+            ClienteId = clienteId;
+            Cedula = cedula;
+            Nombre = nombre;
+            PrimerApellido = primerApellido;
+            SegundoApellido = segundoApellido;
+            Telefonos = telefonos;
+            Email = email;
+            Direccion = direccion;
+        }
+
         [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
         public string ClienteId { get; set; }
 
@@ -33,7 +45,7 @@ namespace Proyecto.Model.MisModelos
         public Telefono[] Telefonos { get; set; }
 
         [BsonElement("email")]
-        public Telefono[] Email { get; set; }
+        public string Email { get; set; }
 
         [BsonElement("direccion")]
         public Direccion Direccion { get; set; }
@@ -44,12 +56,26 @@ namespace Proyecto.Model.MisModelos
 
     public class Telefono
     {
+        public Telefono(string tipo, string numero)
+        {
+            Tipo = tipo;
+            Numero = numero;
+        }
+
         public string Tipo { get; set; }
         public string Numero { get; set; }
     }
 
     public class Direccion
     {
+        public Direccion(string pais, string provincia, string canton, string distrito)
+        {
+            Pais = pais;
+            Provincia = provincia;
+            Canton = canton;
+            Distrito = distrito;
+        }
+
         public string Pais { get; set; }
         public string Provincia { get; set; }
         public string Canton { get; set; }
