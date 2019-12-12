@@ -1,8 +1,10 @@
 ﻿@model Proyecto.Model.MisModelos.Cliente
 
 @{
-    Layout = null;
+    ViewBag.Title = "";
 }
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
 
 <!DOCTYPE html>
 
@@ -60,7 +62,7 @@
                     @telefono.Tipo
                 </dd>
                 <dt>
-                    Número 
+                    Número
                 </dt>
 
                 <dd>
@@ -112,7 +114,7 @@
     </div>
     <p>
 
-        @Html.ActionLink("Edit", "Edit",new { id=Model.Cedula } ) |
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Cedula }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
 </body>
