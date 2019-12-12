@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Proyecto.Logic.Conexion
 {
-    class Clientes
+    public class Clientes
     {
         public async Task Insert<T>(T[] clientes, string dbName, string tableName)
         {

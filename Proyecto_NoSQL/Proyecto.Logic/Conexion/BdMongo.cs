@@ -8,7 +8,7 @@ using System.Configuration;
 
 namespace Proyecto.Logic.Conexion
 {
-    class BdMongo
+    public class BdMongo
     {
 
         public void ConnectWithoutAuthentication()
