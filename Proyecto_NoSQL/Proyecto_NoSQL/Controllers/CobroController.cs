@@ -37,12 +37,12 @@ namespace Proyecto_NoSQL.Controllers
                         "Información de factura:\n" +
                         "Cédula:" + cliente.Cedula + "\n" +
                         "Descripción: " + factura.descripcion + "\n" +
-                        "Costo del sercio= " + factura.valor + "\n" +
-                       "IVA(" + factura.iva + ") = " + impuestos + "\n" +
-                       "Total= " +  total + "\n" +
-                       "Método de Pago: " + factura.medioPago + "\n" +
-                       "Monto Cancelado= " + factura.montoCancelado + "\n" +
-                       "Cambio= " + cambio
+                        "Costo del sercio= ¢" + factura.valor + "\n" +
+                       "IVA(" + factura.iva +"%) = ¢" + impuestos + "\n" +
+                       "Total= ¢" +  total + "\n" +
+                       "Método de Pago: ¢" + factura.medioPago + "\n" +
+                       "Monto Cancelado= ¢" + factura.montoCancelado + "\n" +
+                       "Cambio= ¢" + cambio
                        );
          
 
