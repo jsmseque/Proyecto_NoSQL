@@ -56,12 +56,21 @@ namespace Proyecto.Model.MisModelos
 
         //[BsonExtraElements]
         // public BsonDocument Metadata { get; set; }
+
+        
+
     }
 
     public class Telefono
     {
         public Telefono()
         {
+        }
+
+        public Telefono(string tipo, string numero)
+        {
+            Tipo = tipo;
+            Numero = numero;
         }
 
         public string Tipo { get; set; }

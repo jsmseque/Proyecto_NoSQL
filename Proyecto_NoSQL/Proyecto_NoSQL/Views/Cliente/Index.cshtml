@@ -30,6 +30,12 @@
                 @Html.DisplayNameFor(model => model.SegundoApellido)
             </th>
             <th>
+                Tipo télefono
+            </th>
+            <th>
+               Número teléfono
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
@@ -38,7 +44,8 @@
             <th></th>
         </tr>
     
-    @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
 
             <td>
@@ -52,6 +59,23 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SegundoApellido)
+            </td>
+            <td>
+
+                @{
+                    String tipoTelef = "-";
+                    String numero = "-";
+                    if (item.Telefonos != null)
+                    {
+                        tipoTelef = item.Telefonos.First().Tipo.ToString();
+                        numero = item.Telefonos.First().Numero.ToString();
+                    }
+                }
+
+                @tipoTelef
+            </td>
+            <td>
+               @numero
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
