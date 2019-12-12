@@ -1,8 +1,12 @@
 ﻿@model Proyecto.Model.MisModelos.Cliente
 
-@{
-    Layout = null;
-}
+
+    @{
+        ViewBag.Title = "Editar Cliente";
+    }
+    <h2>@ViewBag.Title</h2>
+    <h3>@ViewBag.Message</h3>
+
 
 <!DOCTYPE html>
 
@@ -14,12 +18,12 @@
 <body>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
-    
-    
+
+
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        
+
         <div class="form-horizontal">
             <h4>Cliente</h4>
             <hr />
@@ -31,7 +35,7 @@
                     @Html.ValidationMessageFor(model => model.Cedula, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -39,7 +43,7 @@
                     @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.PrimerApellido, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -47,7 +51,7 @@
                     @Html.ValidationMessageFor(model => model.PrimerApellido, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.SegundoApellido, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -55,7 +59,7 @@
                     @Html.ValidationMessageFor(model => model.SegundoApellido, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -63,7 +67,7 @@
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Save" class="btn btn-default" />
@@ -71,7 +75,7 @@
             </div>
         </div>
     }
-    
+
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>

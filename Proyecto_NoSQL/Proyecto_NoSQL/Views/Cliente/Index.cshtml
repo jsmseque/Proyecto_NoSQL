@@ -1,8 +1,11 @@
 ﻿@model IEnumerable<Proyecto.Model.MisModelos.Cliente>
 
 @{
-    Layout = null;
+    ViewBag.Title = "Clientes";
 }
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
 
 <!DOCTYPE html>
 
@@ -34,33 +37,34 @@
             </th>
             <th></th>
         </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Cedula)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrimerApellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SegundoApellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Cedula }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Cedula }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Cedula })
-            </td>
-        </tr>
-    }
-    
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cedula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrimerApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SegundoApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Cedula }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Cedula }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Cedula })
+                </td>
+            </tr>
+        }
+
     </table>
 </body>
 </html>
